@@ -25,10 +25,9 @@ func main() {
 			maxTemp := cmd.Float("maxTemp")
 			stMeritev := cmd.Int("stMeritev")
 			vreme.NastaviNastavitve(minTemp, maxTemp, stMeritev)
-			vreme.DodajPostajo("LJ01", "Ljubljana Zahod", "Ljubljana")
-			vreme.DodajMeritev("LJ01", 22)
-			vreme.IzpisMeritev()
-			vreme.IzpisPorocila()
+
+			simulirajPostaje()
+
 			return nil
 		},
 	}
@@ -37,6 +36,9 @@ func main() {
 		log.Fatal(err)
 	}
 
+}
+
+func simulirajPostaje() {
 	vreme.DodajPostajo("LJ01", "Ljubljana Sever", "Ljubljana")
 	vreme.DodajPostajo("LJ02", "Ljubljana Jug", "Ljubljana")
 	vreme.DodajPostajo("LJ03", "Ljubljana Zahod", "Ljubljana")
@@ -55,6 +57,15 @@ func main() {
 	vreme.DodajMeritev("MB01", -120) // Primer dodajanja prenizke temperature
 	vreme.DodajMeritev("MB02", 10)   // Primer dodajanja postaji ki ne obstaja
 
+	vreme.DodajMeritev("LJ01", -10)
+	vreme.DodajMeritev("LJ01", -20)
+	vreme.DodajMeritev("LJ01", -80)
+	vreme.DodajMeritev("LJ02", 10)
+	vreme.DodajMeritev("LJ02", 10)
+	vreme.DodajMeritev("LJ02", 10)
+	vreme.DodajMeritev("LJ03", 16)
+	vreme.DodajMeritev("LJ03", 17)
+	vreme.DodajMeritev("LJ03", 19)
 	fmt.Println()
 	fmt.Println()
 	vreme.IzpisMeritev()
@@ -62,5 +73,4 @@ func main() {
 	fmt.Println()
 	fmt.Println()
 	vreme.IzpisPorocila()
-
 }
