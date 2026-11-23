@@ -1,0 +1,23 @@
+Napišite modul v jeziku Go in ga objavite na enem od javnih repozitorijev. Preko spletne učilnice oddajte povezavo do modula.
+
+Navodila:
+
+Kodo iz domače naloge 1 zapakirajte v modul in jo objavite v javnem repozitoriju. Znotraj modula ustvarite paket vreme, ki vsebuje strukturo Postaja in funkcije za delo z vremenskimi postajami, ter paket main, ki te funkcije uporablja.
+
+Paket vreme naj izvaža naslednje funkcije:
+
+    DodajMeritev,
+    IzpisMeritev,
+    IzpisPorocila.
+
+Funkcija statistika naj bo del paketa, vendar naj ostane skrita. Ker so polja strukture Postaja neizvožena, paket main postaj ne more ustvariti sam. Paketu zato dodajte še izvoženo funkcijo DodajPostajo, ki v slovar doda novo postajo z dano oznako, imenom in krajem.
+
+Kodo rešitve 1. domače naloge lahko poljubno reorganizirate in po potrebi prilagodite parametre funkcij. Le funkcionalnost izvoženih funkcij naj ostane enaka. V vaši rešitvi uporabite paket github.com/urfave/cli/v3 za gradnjo aplikacij z ukaznim vmesnikom. Aplikaciji dodajte tri stikala:
+
+    minTemp, najnižja dovoljena temperatura meritve (privzeto -50 °C);
+    maxTemp, najvišja dovoljena temperatura meritve (privzeto 50 °C);
+    stMeritev, najmanjše število meritev, potrebnih za izračun statistike (privzeto 3).
+
+Zgledujete se lahko po primeru. Paketu postaje dodajte ustrezno dokumentacijo. Pri pisanju dokumentacije se poskušajte držati pravil.
+
+Ko je modul pripravljen, v repozitoriju ustvarite oznako različice (npr. v1.0.0), tako da ga lahko drugi uvozijo z ukazom go get <pot modula>@v1.0.0. Preverite, ali se modul s to različico prikaže na strani pkg.go.dev.

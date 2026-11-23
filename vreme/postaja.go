@@ -8,10 +8,13 @@ type Postaja struct {
 	meritve []float64
 }
 
-var postaje map[string]Postaja
+var postaje map[string]Postaja = make(map[string]Postaja)
+var minTemp float64 = -50
+var maxTemp float64 = 50
+var stMeritev int = 50
 
 func DodajMeritev(oznaka string, temperatura float64) {
-	if temperatura < -50 || temperatura > 50 {
+	if temperatura < minTemp || temperatura > maxTemp {
 		fmt.Printf("temperatura %.1f izven dovoljenega intervala\n", temperatura)
 		return
 	}
@@ -46,7 +49,7 @@ func statistika(oznaka string) (najnizja, najvisja, povprecna float64, ok bool) 
 	var postaja Postaja
 	var obstaja bool
 	postaja, obstaja = postaje[oznaka]
-	if !obstaja || len(postaja.meritve) < 3 {
+	if !obstaja || len(postaja.meritve) < stMeritev {
 		return 0, 0, 0, false
 	}
 	var minTemp float64 = postaja.meritve[0]
@@ -91,5 +94,11 @@ func IzpisPorocila() {
 }
 
 func DodajPostajo(oznaka string, ime string, kraj string) {
-	postaje[oznaka] = Postaja{ime, kraj, []float64{30, 10}}
+	postaje[oznaka] = Postaja{ime, kraj, []float64{}}
+}
+
+func NastaviNastavitve(newMinTemp float64, newMaxTemp float64, minStMeritev int) {
+	minTemp = newMinTemp
+	maxTemp = newMaxTemp
+	stMeritev = minStMeritev
 }

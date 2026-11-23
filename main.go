@@ -1,11 +1,41 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"naloga5/vreme"
+	"log"
+	"os"
+
+	"github.com/KristyBisti/psdn5/vreme"
+	"github.com/urfave/cli/v3"
 )
 
 func main() {
+
+	cmd := &cli.Command{
+		Name:  "vremenskaPostaja",
+		Usage: "Postaja meri temperaturo",
+		Flags: []cli.Flag{
+			&cli.FloatFlag{Name: "minTemp", Value: -50, Usage: "najnižja dovoljena temperatura meritve"},
+			&cli.FloatFlag{Name: "maxTemp", Value: 50, Usage: "najvišja dovoljena temperatura meritve"},
+			&cli.IntFlag{Name: "stMeritev", Value: 3, Usage: "najmanjše število meritev za statistiko"},
+		},
+		Action: func(ctx context.Context, cmd *cli.Command) error {
+			minTemp := cmd.Float("minTemp")
+			maxTemp := cmd.Float("maxTemp")
+			stMeritev := cmd.Int("stMeritev")
+			vreme.NastaviNastavitve(minTemp, maxTemp, stMeritev)
+			vreme.DodajPostajo("LJ01", "Ljubljana Zahod", "Ljubljana")
+			vreme.DodajMeritev("LJ01", 22)
+			vreme.IzpisMeritev()
+			vreme.IzpisPorocila()
+			return nil
+		},
+	}
+
+	if err := cmd.Run(context.Background(), os.Args); err != nil {
+		log.Fatal(err)
+	}
 
 	vreme.DodajPostajo("LJ01", "Ljubljana Sever", "Ljubljana")
 	vreme.DodajPostajo("LJ02", "Ljubljana Jug", "Ljubljana")
