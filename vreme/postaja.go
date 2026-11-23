@@ -1,9 +1,9 @@
-// Package vreme allows us to create and manage weather stations
+// Package vreme allows us to create and manage weather stations.
 package vreme
 
 import "fmt"
 
-// Postaja is a structure with the name, location and meassurements of a weather station
+// Postaja is a structure with the name, location and measurements of a weather station.
 type Postaja struct {
 	ime     string
 	kraj    string
@@ -34,7 +34,7 @@ func DodajMeritev(oznaka string, temperatura float64) {
 	postaje[oznaka] = postaja
 }
 
-// IzpisMeritev displays all of the saved weather stations, their tag, location, name and meassurements
+// IzpisMeritev displays all of the saved weather stations, their tag, location, name and measurements.
 func IzpisMeritev() {
 	fmt.Printf("MERITVE:\n")
 	for oznaka, postaja := range postaje {
@@ -100,12 +100,12 @@ func IzpisPorocila() {
 	}
 }
 
-// DodajPostajo adds a new station with a tag, name and location
+// DodajPostajo adds a new station with a tag, name and location.
 func DodajPostajo(oznaka string, ime string, kraj string) {
 	postaje[oznaka] = Postaja{ime, kraj, []float64{}}
 }
 
-// NastaviNastavitve sets the lowest and highest allowed temperature as well as the minimum meassurements to display statistics
+// NastaviNastavitve sets the lowest and highest allowed temperature as well as the minimum measurements to display statistics.
 func NastaviNastavitve(newMinTemp float64, newMaxTemp float64, minStMeritev int) {
 	minTemp = newMinTemp
 	maxTemp = newMaxTemp
